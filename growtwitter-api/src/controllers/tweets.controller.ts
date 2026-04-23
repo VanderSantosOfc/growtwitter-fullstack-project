@@ -47,7 +47,7 @@ export class TweetsController {
 
   public async findTweet(req: Request, res: Response) {
     try {
-      const { id } = req.params;
+      const id = req.params.id as string;
 
       const service = new TweetService(new LikeService());
 
@@ -68,7 +68,7 @@ export class TweetsController {
   public async updateTweet(req: Request, res: Response) {
     try {
       const authorId = req.user.id;
-      const { id } = req.params;
+      const id = req.params.id as string;
       const { content } = req.body;
 
       const service = new TweetService(new LikeService());
@@ -92,7 +92,7 @@ export class TweetsController {
   public async deleteTweet(req: Request, res: Response) {
     try {
       const authorId = req.user.id;
-      const { id } = req.params;
+      const id = req.params.id as string;
 
       const service = new TweetService(new LikeService());
 
@@ -113,7 +113,7 @@ export class TweetsController {
 
   public async listTweetsByUserId(req: Request, res: Response) {
     try {
-      const { userId } = req.params;
+      const userId = req.params.userId as string;
 
       const service = new TweetService(new LikeService());
 
