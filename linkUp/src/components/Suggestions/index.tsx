@@ -17,10 +17,7 @@ export const Suggestions = () => {
       
       if (res.success) {
         const currentLoggedId = loggedUser?.id || loggedUser?._id;
-        
         const filtered = res.data.filter((u: any) => u.id !== currentLoggedId);
-        
-        
         setUsers(filtered.sort(() => 0.5 - Math.random()).slice(0, 3));
       }
     } catch (e) {
@@ -44,8 +41,20 @@ export const Suggestions = () => {
   }
 
   return (
-    <Paper sx={{ p: 2, bgcolor: '#f7f9f9', borderRadius: 4, mt: 2 }} variant="outlined">
-      <Typography variant="h6" sx={{ fontWeight: "800", mb: 2 }}>Quem seguir</Typography>
+    <Paper 
+      sx={{ 
+        p: 2, 
+        bgcolor: '#f7f9f9', 
+        borderRadius: 4, 
+        mt: 2,
+        width: '100%', 
+        boxSizing: 'border-box'
+      }} 
+      variant="outlined"
+    >
+      <Typography variant="h6" sx={{ fontWeight: "800", mb: 2 }}>
+        Quem seguir
+      </Typography>
       
       <Stack spacing={3}>
         {users.map((u) => (
@@ -60,6 +69,8 @@ export const Suggestions = () => {
               p: 1,
               borderRadius: 2,
               transition: '0.2s',
+              width: '100%', 
+              overflow: 'hidden', 
               "&:hover": { 
                 bgcolor: 'rgba(0,0,0,0.03)',
                 opacity: 0.9 
@@ -68,12 +79,17 @@ export const Suggestions = () => {
           >
             <Avatar 
               src={u.imageUrl} 
-              sx={{ bgcolor: '#1d9bf0', width: 40, height: 40 }}
+              sx={{ 
+                bgcolor: '#1d9bf0', 
+                width: 40, 
+                height: 40,
+                flexShrink: 0 
+              }}
             >
               {u.name[0]}
             </Avatar>
             
-            <Box sx={{ overflow: 'hidden' }}>
+            <Box sx={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
               <Typography 
                 variant="subtitle2" 
                 sx={{ 
@@ -85,7 +101,16 @@ export const Suggestions = () => {
               >
                 {u.name}
               </Typography>
-              <Typography variant="caption" color="textSecondary">
+              <Typography 
+                variant="caption" 
+                color="textSecondary"
+                sx={{ 
+                  display: 'block',
+                  whiteSpace: 'nowrap', 
+                  overflow: 'hidden', 
+                  textOverflow: 'ellipsis' 
+                }}
+              >
                 @{u.username}
               </Typography>
             </Box>

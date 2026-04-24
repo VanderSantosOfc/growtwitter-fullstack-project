@@ -24,31 +24,36 @@ export const TweetCard = ({ tweet, onUpdate }: { tweet: any; onUpdate: () => voi
   };
 
   return (
-    <Box sx={{ borderBottom: '1px solid #EFF3F4' }}>
-      <Box sx={{ p: 2, display: 'flex' }}>
+    <Box sx={{ borderBottom: '1px solid #EFF3F4', width: '100%' }}>
+      <Box sx={{ p: { xs: 1.5, sm: 2 }, display: 'flex' }}>
         <Avatar 
           src={tweet.author?.imageUrl} 
-          sx={{ mr: 2, cursor: 'pointer' }} 
+          sx={{ 
+            mr: { xs: 1.5, sm: 2 }, 
+            cursor: 'pointer',
+            width: { xs: 40, sm: 48 },
+            height: { xs: 40, sm: 48 }
+          }} 
           onClick={handleGoToProfile} 
         >
           {tweet.author?.name?.charAt(0).toUpperCase()}
         </Avatar>
 
-        <Box sx={{ flex: 1 }}>
-          <Box sx={{ display: 'flex', gap: 1, mb: 0.5, cursor: 'pointer' }} onClick={handleGoToProfile}>
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <Box sx={{ display: 'flex', gap: 1, mb: 0.5, cursor: 'pointer', alignItems: 'center', flexWrap: 'wrap' }} onClick={handleGoToProfile}>
             <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
               {tweet.author?.name}
             </Typography>
-            <Typography variant="caption" color="textSecondary">
+            <Typography variant="caption" color="textSecondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               @{tweet.author?.username}
             </Typography>
           </Box>
 
-          <Typography variant="body1" sx={{ mb: 1, whiteSpace: 'pre-wrap' }}>
+          <Typography variant="body1" sx={{ mb: 1, whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontSize: { xs: '0.95rem', sm: '1rem' } }}>
             {tweet.content}
           </Typography>
           
-          <Box sx={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', gap: { xs: 2.5, sm: 4 }, alignItems: 'center' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <IconButton size="small" onClick={() => setOpenReply(true)}>
                 <ChatBubbleOutlined sx={{ fontSize: 18 }} />
@@ -79,7 +84,7 @@ export const TweetCard = ({ tweet, onUpdate }: { tweet: any; onUpdate: () => voi
 
       {tweet.replies && tweet.replies.length > 0 && (
         <Box sx={{ 
-          ml: 6, 
+          ml: { xs: 2, sm: 6 }, 
           borderLeft: '2px solid #EFF3F4', 
           bgcolor: 'rgba(0,0,0,0.01)' 
         }}>
@@ -93,7 +98,6 @@ export const TweetCard = ({ tweet, onUpdate }: { tweet: any; onUpdate: () => voi
         </Box>
       )}
 
-      {/* MODAL DE RESPOSTA */}
       <ReplyModal 
         open={openReply} 
         handleClose={() => setOpenReply(false)} 

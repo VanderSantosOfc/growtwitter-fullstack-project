@@ -30,12 +30,19 @@ export const Signup = () => {
 
   return (
     <Container maxWidth="xs">
-      <Box sx={{ mt: 8, textAlign: 'center' }}>
+      <Box sx={{ 
+        mt: { xs: 4, sm: 8 }, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center',
+        textAlign: 'center',
+        px: { xs: 2, sm: 0 }
+      }}>
         <Typography variant="h4" color="primary" sx={{ fontWeight: 'bold', mb: 3 }}>
           Criar sua conta
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit} noValidate>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ width: '100%' }}>
           <TextField 
             fullWidth 
             label="Nome Completo" 

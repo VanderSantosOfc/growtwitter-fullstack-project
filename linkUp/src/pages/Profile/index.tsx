@@ -13,7 +13,6 @@ export const Profile = () => {
   const [tweets, setTweets] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  
   const currentLoggedId = loggedUser?.id || loggedUser?._id;
   const isFollowing = !!user?.followers?.some((f: any) => {
     const followerIdFromDB = f.followerId || f.id || f;
@@ -38,7 +37,6 @@ export const Profile = () => {
     }
   };
 
- 
   useEffect(() => { 
     setUser(null); 
     fetchData(); 
@@ -64,14 +62,19 @@ export const Profile = () => {
   if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', p: 5 }}><CircularProgress /></Box>;
 
   return (
-    <Box>
-      <Box sx={{ height: 150, bgcolor: '#CFD9DE' }} />
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ height: { xs: 120, sm: 150 }, bgcolor: '#CFD9DE' }} />
 
       <Box sx={{ px: 2, mb: 2 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: '-50px', alignItems: 'flex-end' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: { xs: '-40px', sm: '-50px' }, alignItems: 'flex-end' }}>
           <Avatar 
-          src={user?.imageUrl} 
-          sx={{ width: 100, height: 100, border: '4px solid white', bgcolor: '#1d9bf0' }}
+            src={user?.imageUrl} 
+            sx={{ 
+              width: { xs: 80, sm: 100 }, 
+              height: { xs: 80, sm: 100 }, 
+              border: '4px solid white', 
+              bgcolor: '#1d9bf0' 
+            }}
           >
             {user?.name?.charAt(0).toUpperCase()}
           </Avatar>
@@ -84,6 +87,7 @@ export const Profile = () => {
                 borderRadius: 20, 
                 fontWeight: 'bold', 
                 textTransform: 'none',
+                height: '36px',
                 bgcolor: isFollowing ? 'transparent' : 'black',
                 color: isFollowing ? 'black' : 'white',
                 border: isFollowing ? '1px solid #cfd9de' : 'none',
@@ -99,7 +103,9 @@ export const Profile = () => {
           )}
         </Box>
 
-        <Typography variant="h5" sx={{ fontWeight: 'bold', mt: 1 }}>{user?.name}</Typography>
+        <Typography variant="h5" sx={{ fontWeight: 'bold', mt: 1, fontSize: { xs: '1.25rem', sm: '1.5rem' } }}>
+          {user?.name}
+        </Typography>
         <Typography color="textSecondary">@{user?.username}</Typography>
 
         <Typography variant="body2" sx={{ mt: 2 }}>
@@ -109,11 +115,19 @@ export const Profile = () => {
 
       <Divider />
 
-      {tweets.length > 0 ? (
-        tweets.map(t => <TweetCard key={t.id} tweet={t} onUpdate={fetchData} />)
-      ) : (
-        <Typography sx={{ p: 4, textAlign: 'center', color: 'gray' }}>Nenhum tweet ainda.</Typography>
-      )}
+      <Box sx={{ width: '100%' }}>
+        {tweets.length > 0 ? (
+          tweets.map(t => (
+            <TweetCard 
+              key={t.id} 
+              tweet={t} 
+              onUpdate={fetchData} 
+            />
+          ))
+        ) : (
+          <Typography sx={{ p: 4, textAlign: 'center', color: 'gray' }}>Nenhum tweet ainda.</Typography>
+        )}
+      </Box>
     </Box>
   );
 };

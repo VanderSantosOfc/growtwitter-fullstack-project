@@ -67,7 +67,6 @@ export const ReplyModal = ({ open, handleClose, tweet, onUpdate }: ReplyModalPro
         </Box>
 
         <Stack direction="row" spacing={2} sx={{ position: 'relative' }}>
-
           <Box sx={{ 
             position: 'absolute', 
             left: 20, 
@@ -75,21 +74,25 @@ export const ReplyModal = ({ open, handleClose, tweet, onUpdate }: ReplyModalPro
             bottom: -10, 
             width: '2px', 
             bgcolor: '#cfd9de',
-            zIndex: 0 
+            zIndex: 0,
+            display: { xs: 'none', sm: 'block' }
           }} />
           
-          <Avatar src={tweet.author.imageUrl} sx={{ zIndex: 1 }}>
+          <Avatar 
+            src={tweet.author.imageUrl} 
+            sx={{ zIndex: 1, width: { xs: 35, sm: 40 }, height: { xs: 35, sm: 40 } }}
+          >
             {tweet.author.name[0]}
           </Avatar>
           
-          <Box>
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+          <Box sx={{ minWidth: 0, flex: 1 }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {tweet.author.name} 
-              <span style={{ color: 'gray', fontWeight: 'normal', marginLeft: '4px' }}>
+              <span style={{ color: 'gray', fontWeight: 'normal' }}>
                 @{tweet.author.username}
               </span>
             </Typography>
-            <Typography variant="body2" sx={{ mt: 0.5, whiteSpace: 'pre-wrap' }}>
+            <Typography variant="body2" sx={{ mt: 0.5, whiteSpace: 'pre-wrap', fontSize: { xs: '0.85rem', sm: '0.875rem' } }}>
               {tweet.content}
             </Typography>
             <Typography variant="caption" color="primary" sx={{ mt: 1, display: 'block' }}>
@@ -99,7 +102,7 @@ export const ReplyModal = ({ open, handleClose, tweet, onUpdate }: ReplyModalPro
         </Stack>
 
         <Stack direction="row" spacing={2} sx={{ mt: 3 }}>
-          <Avatar sx={{ bgcolor: '#1d9bf0' }}>R</Avatar> 
+          <Avatar sx={{ bgcolor: '#1d9bf0', width: { xs: 35, sm: 40 }, height: { xs: 35, sm: 40 } }}>R</Avatar> 
           
           <TextField
             fullWidth
@@ -110,11 +113,21 @@ export const ReplyModal = ({ open, handleClose, tweet, onUpdate }: ReplyModalPro
             value={content}
             onChange={(e) => setContent(e.target.value)}
             slotProps={{ input: { disableUnderline: true } }}
-            sx={{ "& .MuiInputBase-root": { fontSize: '1.2rem' } }}
+            sx={{ 
+              "& .MuiInputBase-root": { 
+                fontSize: { xs: '1rem', sm: '1.2rem' } 
+              } 
+            }}
           />
         </Stack>
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2, pt: 2, borderTop: '1px solid #eff3f4' }}>
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'flex-end', 
+          mt: 2, 
+          pt: 2, 
+          borderTop: '1px solid #eff3f4' 
+        }}>
           <Button 
             variant="contained" 
             onClick={handleReply}
@@ -124,7 +137,8 @@ export const ReplyModal = ({ open, handleClose, tweet, onUpdate }: ReplyModalPro
               fontWeight: 'bold', 
               textTransform: 'none', 
               px: 3,
-              boxShadow: 'none'
+              boxShadow: 'none',
+              width: { xs: '100%', sm: 'auto' } 
             }}
           >
             {loading ? <CircularProgress size={24} color="inherit" /> : 'Responder'}
