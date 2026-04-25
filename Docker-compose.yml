@@ -40,3 +40,31 @@ services:
     environment:
       - VITE_API_URL=http://localhost:3000
 
+
+
+# services:
+#   # Backend
+#   api:
+#     build: ./growtwitter-api
+#     container_name: backend-linkup
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - ./growtwitter-api:/app
+#       - /app/node_modules
+#     environment:
+#       - NODE_ENV=development
+
+#   # Frontend
+#   web:
+#     build: ./linkUp
+#     container_name: frontend-linkup
+#     ports:
+#       - "5173:5173"
+#     volumes:
+#       - ./linkUp:/app
+#       - /app/node_modules
+#     depends_on:
+#       - api
+#     environment:
+#       - VITE_API_URL=http://localhost:3000
